@@ -8,13 +8,13 @@ Follow the steps below to create and activate a virtual environment for Python.
 
 ## Windows (PowerShell)
 
-```powershell
 # Create virtual environment in folder 'env'
+```powershell
 python -m venv env
 ```
 
 # Activate the virtual environment
-```Activate
+```powershell
 .\env\Scripts\Activate.ps1
 ```
 
