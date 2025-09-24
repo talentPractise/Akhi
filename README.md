@@ -1,6 +1,4 @@
-# Akhi
-
-# Python Environment Setup
+## Python Environment Setup
 
 Follow the steps below to create and activate a virtual environment for Python.
 
