@@ -11,6 +11,11 @@ Follow the steps below to create and activate a virtual environment for Python.
 python -m venv env
 ```
 
+### Automatically set the environment
+```
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
 ### Activate the virtual environment
 ```powershell
 .\env\Scripts\Activate.ps1
