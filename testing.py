@@ -375,7 +375,7 @@ class UnifiedDynamicOOPMAXFramework:
         
         return response.json()
     
-    
+
     def _validate_scenario_response(self, response: Dict[str, Any], scenario: ScenarioConfig):
         """Validate API response against scenario expectations."""
         # Extract response info
@@ -461,8 +461,6 @@ class UnifiedDynamicOOPMAXFramework:
         with open(output_path / "cost_response.json", 'w') as f:
             json.dump(cost_response, f, indent=2)
         
-        print(f"Generated test data saved to: {output_path}")
-        return cost_request, benefit_response, accumulator_response, cost_response
 
 
 # Initialize framework
@@ -489,21 +487,6 @@ for scenario in framework.scenarios:
     globals()[test_func.__name__] = test_func
 
 
-# Utility functions
-def generate_all_test_data():
-    """Generate test data for all scenarios from CSV."""
-    print("Generating test data for all OOPMAX scenarios from CSV...")
-    
-    for scenario in framework.scenarios:
-        print(f"\nProcessing Scenario {scenario.sr_no}: {scenario.scenario_name}")
-        print(f"   Expected Member Pays: {scenario.expected_member_pays}")
-        print(f"   Service Amount: {scenario.service_amount}")
-        print(f"   Logic: {scenario.logic}")
-        
-        # Generate and save test data
-        framework.save_generated_data(scenario)
-        
-        print(f"Generated: cost_request.json, benefit_response.json, accumulator_response.json, cost_response.json")
 
 
 def run_all_scenarios():
@@ -515,12 +498,6 @@ def run_all_scenarios():
         framework.run_scenario_test(scenario)
         print(f"Scenario {scenario.sr_no} passed!")
 
-
-# Test functions
-@pytest.mark.asyncio
-async def test_generate_all_scenarios():
-    """Generate test data for all scenarios from CSV."""
-    generate_all_test_data()
 
 
 @pytest.mark.asyncio
