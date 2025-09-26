@@ -329,15 +329,17 @@ class UnifiedDynamicOOPMAXFramework:
         from app.models.rate_criteria import NegotiatedRate
         from app.schemas.benefit_response import BenefitApiResponse
         from app.schemas.accumulator_response import AccumulatorResponse
-        
+
+        cost_request = self._generate_cost_request(scenario)
+
         # Generate mock data
-        benefit_response_data = self._generate_benefit_response(scenario)
-        accumulator_response_data = self._generate_accumulator_response(scenario)
+        benefit_response = self._generate_benefit_response(scenario)
+        accumulator_response = self._generate_accumulator_response(scenario)
         
         # Build mock services
-        benefit_api_response = BenefitApiResponse(**benefit_response_data)
-        accumulator_response = AccumulatorResponse(**accumulator_response_data)
-        
+        benefit_api_response = BenefitApiResponse(**benefit_response)
+        accumulator_api_response = AccumulatorResponse(**accumulator_response)
+
         # Mock external services
         with patch('app.services.impl.benefit_service_impl.BenefitServiceImpl.get_benefit') as mock_benefit, \
              patch('app.services.impl.accumulator_service_impl.AccumulatorServiceImpl.get_accumulator') as mock_accumulator, \
@@ -364,12 +366,15 @@ class UnifiedDynamicOOPMAXFramework:
                 "x-clientrefid": f"oopmax-client-{scenario.sr_no}",
             }
         
-        response = client.post("/costestimator/v1/rate", json=cost_request_data, headers=headers)
-    
+        response = client.post("/costestimator/v1/rate", json=cost_request, headers=headers)
+
+        self.save_generated_data(scenario, cost_request, benefit_api_response, accumulator_api_response, response.json())
+
         if response.status_code != 200:
             raise AssertionError(f"API call failed with status {response.status_code}: {response.text}")
         
         return response.json()
+    
     
     def _validate_scenario_response(self, response: Dict[str, Any], scenario: ScenarioConfig):
         """Validate API response against scenario expectations."""
@@ -430,45 +435,14 @@ class UnifiedDynamicOOPMAXFramework:
     
     def run_scenario_test(self, scenario: ScenarioConfig):
         """Run a single scenario test."""
-        # Generate test data dynamically
-        cost_request_data = self._generate_cost_request(scenario)
-        benefit_response_data = self._generate_benefit_response(scenario)
-        accumulator_response_data = self._generate_accumulator_response(scenario)
-        
-        # Build mock services
-        benefit_api_response = BenefitApiResponse(**benefit_response_data)
-        accumulator_response = AccumulatorResponse(**accumulator_response_data)
-        
-        # Mock external services
-        with patch('app.services.impl.benefit_service_impl.BenefitServiceImpl.get_benefit') as mock_benefit, \
-             patch('app.services.impl.accumulator_service_impl.AccumulatorServiceImpl.get_accumulator') as mock_accumulator, \
-             patch('app.repository.impl.cost_estimator_repository_impl.CostEstimatorRepositoryImpl.get_rate') as mock_rate, \
-             patch('app.core.session_manager.SessionManager.get_token') as mock_token:
-            
-            # Configure mocks
-            mock_token.return_value = "mock_token"
-            mock_benefit.return_value = benefit_api_response
-            mock_accumulator.return_value = accumulator_response
-            mock_rate.return_value = NegotiatedRate(
-                paymentMethod="AMT",
-                rate=scenario.service_amount,
-                rateType="AMOUNT",
-                isRateFound=True,
-                isProviderInfoFound=True,
-            )
+        # Make API call
+        response = self._make_api_call(scenario)
 
-            # Make API call
-            response = self._make_api_call(cost_request_data, scenario)
-            
-            # Validate response
-            self._validate_scenario_response(response, scenario)
-    
-    def save_generated_data(self, scenario: ScenarioConfig, output_dir: str = "tests/generated_oopmax_data"):
+        # Validate response
+        self._validate_scenario_response(response, scenario)
+
+    def save_generated_data(self, scenario: ScenarioConfig, cost_request, benefit_response, accumulator_response, cost_response, output_dir: str = "tests/generated_oopmax_data"):
         """Save generated test data to JSON files (optional)."""
-        cost_request = self._generate_cost_request(scenario)
-        benefit_response = self._generate_benefit_response(scenario)
-        accumulator_response = self._generate_accumulator_response(scenario)
-        cost_response = self._generate_cost_response(scenario)
         
         # Create output directory
         output_path = Path(output_dir) / f"scenario_{scenario.sr_no.replace('.', '_')}"
