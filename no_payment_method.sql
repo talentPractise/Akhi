@@ -1,0 +1,1291 @@
+-- Row Number: 254
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "2476";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9326579"
+    AND NETWORK_ID = "339"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9326579
+    AND NETWORK_ID = "339"
+    AND SERVICE_LOCATION_NBR = 6570038
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9326579
+    AND NETWORK_ID = "339"
+    AND SERVICE_LOCATION_NBR = 6570038
+    AND SPECIALTY_CD = "10401";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 263
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "28655";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6380595"
+    AND NETWORK_ID = "454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6380595
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 158015
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6380595
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 158015
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 280
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "27614";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9772264"
+    AND NETWORK_ID = "606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9772264
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 6876720
+    AND PROVIDER_TYPE_CD = "PT";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9772264
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 6876720
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 363
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "31201";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6210745"
+    AND NETWORK_ID = "1812"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6210745
+    AND NETWORK_ID = "1812"
+    AND SERVICE_LOCATION_NBR = 7490153
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6210745
+    AND NETWORK_ID = "1812"
+    AND SERVICE_LOCATION_NBR = 7490153
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 543
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "27511";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6578077"
+    AND NETWORK_ID = "606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6578077
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 5540878
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6578077
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 5540878
+    AND SPECIALTY_CD = "10401";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 621
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "28105";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4497126"
+    AND NETWORK_ID = "454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4497126
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 4861139
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4497126
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 4861139
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 692
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "28105";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4497126"
+    AND NETWORK_ID = "454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4497126
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 4861139
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4497126
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 4861139
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 732
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "75070";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6347355"
+    AND NETWORK_ID = "8158"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6347355
+    AND NETWORK_ID = "8158"
+    AND SERVICE_LOCATION_NBR = 8646357
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6347355
+    AND NETWORK_ID = "8158"
+    AND SERVICE_LOCATION_NBR = 8646357
+    AND SPECIALTY_CD = "10401";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 774
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "G0136"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "27030";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "7243170"
+    AND NETWORK_ID = "3200"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "G0136"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7243170
+    AND NETWORK_ID = "3200"
+    AND SERVICE_LOCATION_NBR = 7896102
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7243170
+    AND NETWORK_ID = "3200"
+    AND SERVICE_LOCATION_NBR = 7896102
+    AND SPECIALTY_CD = "10201";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "G0136"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "G0136"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10201"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "G0136"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10201"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 861
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "28277";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4233642"
+    AND NETWORK_ID = "454"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4233642
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 9536181
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4233642
+    AND NETWORK_ID = "454"
+    AND SERVICE_LOCATION_NBR = 9536181
+    AND SPECIALTY_CD = "10401";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 864
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND ZIP_CODE_UN = "84067";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "7005047"
+    AND NETWORK_ID = "9512"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7005047
+    AND NETWORK_ID = "9512"
+    AND SERVICE_LOCATION_NBR = 7944919
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7005047
+    AND NETWORK_ID = "9512"
+    AND SERVICE_LOCATION_NBR = 7944919
+    AND SPECIALTY_CD = "10701";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10701"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10701"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1010
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "60169";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9259598"
+    AND NETWORK_ID = "243"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9259598
+    AND NETWORK_ID = "243"
+    AND SERVICE_LOCATION_NBR = 2672805
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9259598
+    AND NETWORK_ID = "243"
+    AND SERVICE_LOCATION_NBR = 2672805
+    AND SPECIALTY_CD = "30601";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "30601"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "30601"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1047
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "10591";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6451270"
+    AND NETWORK_ID = "357"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6451270
+    AND NETWORK_ID = "357"
+    AND SERVICE_LOCATION_NBR = 1380685
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6451270
+    AND NETWORK_ID = "357"
+    AND SERVICE_LOCATION_NBR = 1380685
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1084
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "77030";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6541570"
+    AND NETWORK_ID = "248"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6541570
+    AND NETWORK_ID = "248"
+    AND SERVICE_LOCATION_NBR = 160705
+    AND PROVIDER_TYPE_CD = "CH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6541570
+    AND NETWORK_ID = "248"
+    AND SERVICE_LOCATION_NBR = 160705
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1103
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "99417"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "32207";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9860434"
+    AND NETWORK_ID = "3892"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99417"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9860434
+    AND NETWORK_ID = "3892"
+    AND SERVICE_LOCATION_NBR = 5134124
+    AND PROVIDER_TYPE_CD = "PH";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9860434
+    AND NETWORK_ID = "3892"
+    AND SERVICE_LOCATION_NBR = 5134124
+    AND SPECIALTY_CD = "10401";
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99417"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99417"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99417"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    AND SPECIALTY_CD = "10401"
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1133
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND ZIP_CODE_UN = "27713";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9018694"
+    AND NETWORK_ID = "606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9018694
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 4045564
+    AND PROVIDER_TYPE_CD = "NP";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9018694
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 4045564
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+
+-- Row Number: 1147
+
+-- OON
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_OON
+WHERE
+    SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND ZIP_CODE_UN = "27607";
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6380685"
+    AND NETWORK_ID = "606"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- CET_PROVIDERS (by provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6380685
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 111426
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- CET_PROVIDERS (by specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,
+    PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM prv_ps_ce_dec_hcb_dev.CET_PROVIDERS
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6380685
+    AND NETWORK_ID = "606"
+    AND SERVICE_LOCATION_NBR = 111426
+    ;
+
+-- Standard Rate
+SELECT MAX(RATE) AS RATE
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'S';
+
+-- Non-standard Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE IN ('C', 'N')
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
+-- Default Rate
+SELECT payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr, MAX(rate) AS rate
+FROM prv_ps_ce_dec_hcb_dev.CET_RATES
+WHERE
+    SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "" OR PRODUCT_CD = 'ALL')
+    AND CONTRACT_TYPE = 'D'
+    
+GROUP BY payment_method_cd, service_group_changed_ind, service_grouping_priority_nbr;
+
