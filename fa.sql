@@ -1,3 +1,1106 @@
+-- Row number 285 for given service_cd  and service_type_cd    place_of_service 81 does not exist in cet_rate
+
+-- Provider Table (if provider table)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7405820
+    AND NETWORK_ID = "00357"
+    AND SERVICE_LOCATION_NBR = 4921825
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+SELECT
+    distinct PLACE_OF_SERVICE_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "82947"
+    AND SERVICE_TYPE_CD = "CPT4"
+    -- AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 336383974
+   
+
+-- non standard rate (if provider_type_cd)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "82947"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 336383974
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "82947"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "22"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 336383974
+                    AND SPECIALTY_CD = "LB"
+            )
+            THEN "LB"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+
+
+-- Row Number 321  for given service_cd  and service_type_cd    place_of_service 81 does not exist in cet_rate
+
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4734262"
+    AND NETWORK_ID = "00408"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4734262
+    AND NETWORK_ID = "00408"
+    AND SERVICE_LOCATION_NBR = 7186551
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+
+-- non standard rate (if provider_type)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 416367953
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "85027"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "81"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 416367953
+                    AND SPECIALTY_CD = "LB"
+            )
+            THEN "LB"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+SELECT distinct PLACE_OF_SERVICE_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+
+
+
+
+-- Row Number 336   place_of_service_cd does not exist in cet_rate table only 22 exist
+
+
+-- claim rate
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6544565"
+    AND NETWORK_ID = "00622"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+-- provider table (if provider table)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6544565
+    AND NETWORK_ID = "00622"
+    AND SERVICE_LOCATION_NBR = 21431
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+-- non standard rate (if provider_type_cd)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 386743194
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "85027"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "81"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 386743194
+                    AND SPECIALTY_CD = "LB"
+            )
+            THEN "LB"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+
+-- Row Num 339 place_of service code does not exist in cet_rate table
+
+-- claim based rate
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "8697277"
+    AND NETWORK_ID = "08164"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 8697277
+    AND NETWORK_ID = "08164"
+    AND SERVICE_LOCATION_NBR = 1227427
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+
+-- non standard rate (if provider_type)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 451937557
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "85027"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "81"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 451937557
+                    AND SPECIALTY_CD = "LB"
+            )
+            THEN "LB"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+-- checking cet_rate table
+SELECT distinct PLACE_OF_SERVICE_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    -- AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 451937557
+    -- AND SPECIALTY_CD = "LB"
+
+
+
+-- 367 png numbr does not exist in cet_rate for given service_cd, service_type_cd, place_of_service_cd and product_cd
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4610543
+    AND NETWORK_ID = "00357"
+    AND SERVICE_LOCATION_NBR = 3946262
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 4610543 
+                       AND NETWORK_ID = "00357" 
+                       AND SERVICE_LOCATION_NBR = 3946262  
+                       AND SPECIALTY_CD = "10307"
+                    ) 
+                THEN "10307" ELSE '' END);
+
+
+-- non standard rate (if specialty_cd)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "3075F"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 576242102
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "3075F"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "11"
+                    AND (PRODUCT_CD ="MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 576242102
+                    AND SPECIALTY_CD = "10307"
+            )
+            THEN "10307"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+-- checking cet_rate table
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "3075F"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD ="MC" OR PRODUCT_CD = 'ALL')
+
+
+
+
+-- 430 network-id is not found for given pin_nbr in provider table
+
+
+-- provider table (if specialty cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4231738
+    and  NETWORK_ID = "00395"
+    AND SERVICE_LOCATION_NBR = 6662559
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 4231738 
+                       AND NETWORK_ID = "00395" 
+                       AND SERVICE_LOCATION_NBR = 6662559  
+                       AND SPECIALTY_CD = "10401"
+                    ) 
+                THEN "10401" ELSE '' END);
+
+
+
+
+-- 455 provider_type_cd does not exist for the given pin, net_id, srv_loc_nbr iin provider table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "5819119"
+    AND NETWORK_ID = "13133"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "98941"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 5819119
+    AND NETWORK_ID = "13133"
+    AND SERVICE_LOCATION_NBR = 9051885
+    AND PROVIDER_TYPE_CD = "DC";
+
+
+
+
+-- Row Number: 566 	service_location_nbr does not exist for given pin_nbr, net_id hence unable to find provider(PBG_NBR)
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4349221
+    AND NETWORK_ID = "01344"
+    AND SERVICE_LOCATION_NBR = 1594295
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 4349221 
+                       AND NETWORK_ID = "01344" 
+                       AND SERVICE_LOCATION_NBR = 1594295  
+                       AND SPECIALTY_CD = "10201"
+                    ) 
+                THEN "10201" ELSE '' END);
+
+
+
+
+-- Row Number: 590 srv_location_nbr does not exist in provider table
+
+
+-- proivder table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 5800210
+    AND NETWORK_ID = "00483"
+    AND SERVICE_LOCATION_NBR = 4172394
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 5800210 
+                       AND NETWORK_ID = "00483" 
+                       AND SERVICE_LOCATION_NBR = 4172394  
+                       AND SPECIALTY_CD = "10201"
+                    ) 
+                THEN "10201" ELSE '' END);
+
+
+
+
+
+
+-- Row Number: 603 pbg_nbr does not exist in cet_rate
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6649889
+    AND NETWORK_ID = "02159"
+    AND SERVICE_LOCATION_NBR = 1735392
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 6649889 
+                       AND NETWORK_ID = "02159" 
+                       AND SERVICE_LOCATION_NBR = 1735392  
+                       AND SPECIALTY_CD = "10201"
+                    ) 
+                THEN "10201" ELSE '' END);
+
+
+
+-- non standard rate (if specialty_cd)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "99395"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    -- AND PROVIDER_BUSINESS_GROUP_NBR = 507840202
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "99395"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "11"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 507840202
+                    AND SPECIALTY_CD = "10201"
+            )
+            THEN "10201"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+
+
+
+
+-- Row Num 609 pbg_nbr exist but place_of_service does not exist in the cet_rate table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6985711"
+    AND NETWORK_ID = "03999"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6985711
+    AND NETWORK_ID = "03999"
+    AND SERVICE_LOCATION_NBR = 2897250
+    AND PROVIDER_TYPE_CD = "LB";
+
+-- non standard rate (if provider_type)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 386743194
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "85027"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "81"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 386743194
+                    AND SPECIALTY_CD = "LB"
+            )
+            THEN "LB"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+-- checking for place of service code
+SELECT distinct PLACE_OF_SERVICE_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4"
+    -- AND PLACE_OF_SERVICE_CD = "81"
+    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 386743194
+    -- AND SPECIALTY_CD = "LB"
+
+
+
+-- Row Num: 625 service_location _nbr does not exist in provider table
+
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4402101"
+    AND NETWORK_ID = "00393"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "76811"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- provider table (if specialty code )
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4402101
+    AND NETWORK_ID = "00393"
+--    AND SERVICE_LOCATION_NBR = 4891135
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 4402101 
+                       AND NETWORK_ID = "00393" 
+                       AND SERVICE_LOCATION_NBR = 4891135  
+                       AND SPECIALTY_CD = "20104"
+                    ) 
+                THEN "20104" ELSE '' END);
+
+
+
+
+
+-- Row Num: 660 pbg_nbr does not exist in cet_rate
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "5072460"
+    AND NETWORK_ID = "00387"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99411"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- provider table (if specialty code)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 5072460
+    AND NETWORK_ID = "00387"
+    AND SERVICE_LOCATION_NBR = 7023374
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 5072460 
+                       AND NETWORK_ID = "00387" 
+                       AND SERVICE_LOCATION_NBR = 7023374  
+                       AND SPECIALTY_CD = "10303"
+                    ) 
+                THEN "10303" ELSE '' END);
+
+
+
+-- non-standard rate (if specialty code)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "99411"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD ="MC" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 726835865
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "99411"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "11"
+                    AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 726835865
+                    AND SPECIALTY_CD = "10303"
+            )
+            THEN "10303"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+-- checking
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "99411"
+AND SERVICE_TYPE_CD = "CPT4"
+AND PLACE_OF_SERVICE_CD = "11"
+AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+AND PROVIDER_BUSINESS_GROUP_NBR = 726835865
+
+
+
+
+-- Row Num: 673  service_cd 30801 and 90388 exists only for the given pin_nbr, network_id,service_location_nbr
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "7864393"
+    AND NETWORK_ID = "00357"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99215"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+-- Provider Table (IF PROVIDER_SPECIALTY_CD)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, SPECIALTY_CD,PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7864393
+    AND NETWORK_ID = "00357"
+    AND SERVICE_LOCATION_NBR = 9370433
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 7864393 
+                       AND NETWORK_ID = "00357" 
+                       AND SERVICE_LOCATION_NBR = 9370433  
+                       AND SPECIALTY_CD = "30810"
+                    ) 
+                THEN "30810" ELSE '' END);
+
+
+
+
+
+-- Row Num: 856 place_of_service_cd does not exist in cet_rate table only 22 
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9601070"
+    AND NETWORK_ID = "00638"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND SERVICE_CD = "80048"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9601070
+    AND NETWORK_ID = "00638"
+    AND SERVICE_LOCATION_NBR = 4444593
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+-- checking
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "80048"
+AND SERVICE_TYPE_CD = "CPT4"
+AND PLACE_OF_SERVICE_CD = "81"
+AND (PRODUCT_CD = "MEPO" OR PRODUCT_CD = 'ALL')
+AND PROVIDER_BUSINESS_GROUP_NBR = 344639058
+
+
+                  
+
+-- Row Num: 960 place_of_service_cd does not exist in cet_rate table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9601070"
+    AND NETWORK_ID = "00638"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND SERVICE_CD = "80048"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+-- Provider Table (if provider type cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9601070
+    AND NETWORK_ID = "00638"
+    AND SERVICE_LOCATION_NBR = 4444593
+    AND PROVIDER_TYPE_CD = "LB";
+
+
+-- non standard (if provider_type_cd)
+
+-- checking
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "80048"
+AND SERVICE_TYPE_CD = "CPT4"
+-- AND PLACE_OF_SERVICE_CD = "81"
+AND (PRODUCT_CD = "MEPO" OR PRODUCT_CD = 'ALL')
+AND PROVIDER_BUSINESS_GROUP_NBR = 344639058
+-- AND SPECIALTY_CD = @providerspecialtycode
+
+
+
+
+-- Row Num: 1044 place_of_service_cd doesn’t exist in cet_rate_table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6961187"
+    AND NETWORK_ID = "00346"
+    AND PLACE_OF_SERVICE_CD = "81"
+    AND SERVICE_CD = "85027"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+-- PROVIDER TABLE (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6961187
+    AND NETWORK_ID = "00346"
+    AND SERVICE_LOCATION_NBR = 3665196
+    AND PROVIDER_TYPE_CD = "LB";
+
+-- non standard (if provider_type_cd)
+-- checking 
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "85027"
+AND SERVICE_TYPE_CD = "CPT4"
+-- AND PLACE_OF_SERVICE_CD = "81"
+AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+AND PROVIDER_BUSINESS_GROUP_NBR  =386743194
+
+
+
+
+-- Row Num: 1066 place_of_service_cd doesn’t exist in cet_rate table only 22
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6152740"
+    AND NETWORK_ID = "00226"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "76014"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6152740
+    AND NETWORK_ID = "00226"
+    AND SERVICE_LOCATION_NBR = 83545
+    AND PROVIDER_TYPE_CD = "HO";
+
+-- non standard (if provider_type_cd)
+
+-- checking cet_rate table
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "76014"
+AND SERVICE_TYPE_CD = "CPT4"
+-- AND PLACE_OF_SERVICE_CD = "22"
+AND (PRODUCT_CD = "MEPO" OR PRODUCT_CD = 'ALL')
+AND PROVIDER_BUSINESS_GROUP_NBR = 315965766
+
+
+
+
+-- Row Num: 1088 pbg_nbr does not exist in the cet_rate table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4472332"
+    AND NETWORK_ID = "00483"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99214"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+  
+-- provider table (if specialty_cd )
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 4472332
+    AND NETWORK_ID = "00483"
+    AND SERVICE_LOCATION_NBR = 5515069
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS` 
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 4472332 
+                       AND NETWORK_ID = "00483" 
+                       AND SERVICE_LOCATION_NBR = 5515069  
+                       AND SPECIALTY_CD = "10303"
+                    ) 
+                THEN "10303" ELSE '' END);
+
+
+
+-- non standard rate (if speciatly cd)
+-- checking cet_rate table
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "99214"
+AND SERVICE_TYPE_CD = "CPT4"
+AND PLACE_OF_SERVICE_CD = "11"
+AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+-- AND PROVIDER_BUSINESS_GROUP_NBR = 514284258
+
+
+
+-- Row Num: 1104    provider_type_cd  does not exist in provided table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9944998"
+    AND NETWORK_ID = "09696"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "97153"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+-- provider table (if provider_type_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9944998
+    AND NETWORK_ID = "09696"
+    AND SERVICE_LOCATION_NBR = 1675670
+    -- AND PROVIDER_TYPE_CD = "ABA";
+
+
+--Row Num: 1110 returning the rate
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "5323162"
+    AND NETWORK_ID = "01344"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "90698"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- provider table (if specialty cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 5323162
+    AND NETWORK_ID = "01344"
+    AND SERVICE_LOCATION_NBR = 1734857
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 5323162 
+                       AND NETWORK_ID = "01344" 
+                       AND SERVICE_LOCATION_NBR = 1734857  
+                       AND SPECIALTY_CD = "10401"
+                    ) 
+                THEN "10401" ELSE '' END);
+
+-- non standard rate (if specialty cd)
+SELECT
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr,
+    MAX(rate) AS rate
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    SERVICE_CD = "90698"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND (PRODUCT_CD = "MEPO" OR PRODUCT_CD = 'ALL')
+    AND PROVIDER_BUSINESS_GROUP_NBR = 564219960
+    AND SPECIALTY_CD = (
+        SELECT CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+                WHERE SERVICE_CD = "90698"
+                    AND SERVICE_TYPE_CD = "CPT4"
+                    AND PLACE_OF_SERVICE_CD = "11"
+                    AND (PRODUCT_CD = "MEPO" OR PRODUCT_CD = 'ALL')
+                    AND PROVIDER_BUSINESS_GROUP_NBR = 564219960
+                    AND SPECIALTY_CD = "10401"
+            )
+            THEN "10401"
+            ELSE ''
+        END
+    )
+GROUP BY
+    payment_method_cd,
+    service_group_changed_ind,
+    service_grouping_priority_nbr;
+
+
+
+-- Row Num: 1134 pbg_nbr doesn’t exist in cet_rate table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6210155"
+    AND NETWORK_ID = "00393"
+    AND PLACE_OF_SERVICE_CD = "21"
+    AND SERVICE_CD = "805"
+    AND SERVICE_TYPE_CD = "DRG";
+
+
+-- provider table (if provider type cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6210155
+    AND NETWORK_ID = "00393"
+    AND SERVICE_LOCATION_NBR = 2441661
+    AND PROVIDER_TYPE_CD = "HO";
+
+
+-- checking cet_rate table
+SELECT *
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE SERVICE_CD = "805"
+AND SERVICE_TYPE_CD = "DRG"
+AND PLACE_OF_SERVICE_CD = "21"
+AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+-- AND PROVIDER_BUSINESS_GROUP_NBR = 300677216
+
+
+
+-- Row Num: 1209    pin_nbr does not exist in provider table
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4391185"
+    AND NETWORK_ID = "01449"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99213"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+-- provider table (if specialty cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    -- PROVIDER_IDENTIFICATION_NBR = 4391185
+    -- AND NETWORK_ID = "01449"
+    -- AND SERVICE_LOCATION_NBR = 5740818
+    -- AND SPECIALTY_CD = 
+    -- (
+    --             SELECT CASE WHEN EXISTS 
+    --                 (SELECT 1 
+    --                  FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+    --                  WHERE PROVIDER_IDENTIFICATION_NBR = 4391185 
+    --                    AND NETWORK_ID = "01449" 
+    --                    AND SERVICE_LOCATION_NBR = 5740818  
+    --                    AND SPECIALTY_CD = "10401"
+    --                 ) 
+    --             THEN "10401" ELSE '' END);
+
+
+-- ** we need to change the cet_provider table query if specialty_cd or provider_type_cd exist
+--Row Num: 1234 in provider table if specialty_cd in provider table does not exist then include the null ones (we need to make changes in the code)
+
+-- Claim Based
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6697543"
+    AND NETWORK_ID = "00355"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99204"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+-- provider table (if specialty cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, SPECIALTY_CD, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 6697543
+    AND NETWORK_ID = "00355"
+    AND SERVICE_LOCATION_NBR = 9034514
+    AND SPECIALTY_CD = 
+    (
+                SELECT CASE WHEN EXISTS 
+                    (SELECT 1 
+                     FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+                     WHERE PROVIDER_IDENTIFICATION_NBR = 6697543 
+                       AND NETWORK_ID = "00355" 
+                       AND SERVICE_LOCATION_NBR = 9034514  
+                       AND SPECIALTY_CD = "90419"
+                    ) 
+                THEN "90419" ELSE '' END);
+
+
+
+-- update provider table query
 SELECT DISTINCT
     PROVIDER_BUSINESS_GROUP_NBR,
     PROVIDER_BUSINESS_GROUP_SCORE_NBR,
@@ -7,7 +1110,7 @@ SELECT DISTINCT
     NETWORK_ID,
     RATING_SYSTEM_CD,
     EPDB_GEOGRAPHIC_AREA_CD
-FROM CET_PROVIDERS
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
 WHERE
     PROVIDER_IDENTIFICATION_NBR = 6697543
     AND NETWORK_ID = "00355"
@@ -18,7 +1121,7 @@ WHERE
             SPECIALTY_CD IS NULL
             AND NOT EXISTS (
                 SELECT 1
-                FROM CET_PROVIDERS
+                FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
                 WHERE PROVIDER_IDENTIFICATION_NBR = 6697543
                   AND NETWORK_ID = "00355"
                   AND SERVICE_LOCATION_NBR = 9034514
@@ -26,42 +1129,3 @@ WHERE
             )
         )
     );
-
-
-
-
-
-SELECT
-    payment_method_cd,
-    service_group_changed_ind,
-    service_grouping_priority_nbr,
-    MAX(rate) AS rate
-FROM CET_RATES
-WHERE
-    SERVICE_CD = "99204"
-    AND SERVICE_TYPE_CD = "CPT4"
-    AND PLACE_OF_SERVICE_CD = "11"
-    AND (PRODUCT_CD = @productcd OR PRODUCT_CD = 'ALL')
-    AND PROVIDER_BUSINESS_GROUP_NBR IN UNNEST(@providerbusinessgroupnbr)
-    AND CONTRACT_TYPE IN ('C', 'N')
-    AND (
-        SPECIALTY_CD = "90419"
-        OR (
-            SPECIALTY_CD IS NULL
-            AND NOT EXISTS (
-                SELECT 1
-                FROM CET_RATES
-                WHERE SERVICE_CD = "99204"
-                    AND SERVICE_TYPE_CD = "CPT4"
-                    AND PLACE_OF_SERVICE_CD = "11"
-                    AND (PRODUCT_CD = @productcd OR PRODUCT_CD = 'ALL')
-                    AND PROVIDER_BUSINESS_GROUP_NBR IN UNNEST(@providerbusinessgroupnbr)
-                    AND CONTRACT_TYPE IN ('C', 'N')
-                    AND SPECIALTY_CD = "90419"
-            )
-        )
-    )
-GROUP BY
-    payment_method_cd,
-    service_group_changed_ind,
-    service_grouping_priority_nbr;
