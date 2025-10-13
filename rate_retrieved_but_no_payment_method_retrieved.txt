@@ -1,0 +1,270 @@
+-- Row number: 254  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9326579"
+    AND NETWORK_ID = "00339"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "90460"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- Row number: 263  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6380595"
+    AND NETWORK_ID = "00454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J0665"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+
+
+
+-- Row number: 280  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9772264"
+    AND NETWORK_ID = "00606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "97112"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- Row number: 363  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6210745"
+    AND NETWORK_ID = "01812"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J1885"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+
+
+
+-- Row number: 543  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6578077"
+    AND NETWORK_ID = "00606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99051"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- Row number: 621  Rate retrieved from cet_claim_based_amounts table
+
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4497126"
+    AND NETWORK_ID = "00454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+-- Row number: 692  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4497126"
+    AND NETWORK_ID = "00454"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "J2704"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+
+
+
+-- Row number: 732  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6347355"
+    AND NETWORK_ID = "08158"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "90461"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+
+— Row Num: 774  network_id and service_location_nbr does not exist in cet_provider table
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 7243170
+    AND NETWORK_ID = "03200"
+    AND SERVICE_LOCATION_NBR = 7896102 
+    AND SPECIALTY_CD = 
+    (       SELECT CASE WHEN EXISTS 
+                (SELECT 1 
+                FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS` 
+                WHERE PROVIDER_IDENTIFICATION_NBR = 7243170 
+                    AND NETWORK_ID = "03200" 
+                    AND SERVICE_LOCATION_NBR = 7896102  
+                    AND SPECIALTY_CD = "10201"
+                ) 
+                THEN "10201" ELSE '' END
+    );
+
+
+
+
+
+-- Row number: 861  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "4233642"
+    AND NETWORK_ID = "00454"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "87651"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- Row number: 864  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "7005047"
+    AND NETWORK_ID = "09512"
+    AND PLACE_OF_SERVICE_CD = "23"
+    AND SERVICE_CD = "99284"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+
+
+— Row Num: 1010.  place_of_service_cd does not exist in standard rate
+
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9259598
+    AND NETWORK_ID = "00243"
+    AND SERVICE_LOCATION_NBR = 2672805
+    AND SPECIALTY_CD = 
+    (       SELECT CASE WHEN EXISTS 
+                (SELECT 1 
+                FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS` 
+                WHERE PROVIDER_IDENTIFICATION_NBR = 9259598 
+                    AND NETWORK_ID = "00243" 
+                    AND SERVICE_LOCATION_NBR = 2672805  
+                    AND SPECIALTY_CD = "30601"
+                ) 
+                THEN "30601" ELSE '' END
+    );
+
+
+-- standard rate 
+SELECT Max(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_RATES`
+WHERE
+    RATE_SYSTEM_CD = "REF"
+    AND SERVICE_CD = "31231"
+    AND SERVICE_TYPE_CD = "CPT4"
+    AND GEOGRAPHIC_AREA_CD = "60169"
+    -- AND PLACE_OF_SERVICE_CD = "11"
+    -- AND (PRODUCT_CD = "MC" OR PRODUCT_CD = 'ALL')
+
+
+
+
+
+-- Row number: 1047  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6451270"
+    AND NETWORK_ID = "00357"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "77067"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+
+-- Row number: 1084  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6541570"
+    AND NETWORK_ID = "00248"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "A9579"
+    AND SERVICE_TYPE_CD = "HCPC";
+
+
+
+
+
+
+— Row Num: 1103. network_id,service_location_nbr and specialty_cd does not exist
+
+-- provider table (if specialty_cd)
+SELECT DISTINCT PROVIDER_BUSINESS_GROUP_NBR, PROVIDER_BUSINESS_GROUP_SCORE_NBR, PROVIDER_IDENTIFICATION_NBR,PRODUCT_CD, SERVICE_LOCATION_NBR, NETWORK_ID, RATING_SYSTEM_CD, EPDB_GEOGRAPHIC_AREA_CD
+FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = 9860434
+    -- AND NETWORK_ID = "03892"
+    -- AND SERVICE_LOCATION_NBR = 5134124
+    -- AND SPECIALTY_CD = 
+    -- (       SELECT CASE WHEN EXISTS 
+    --             (SELECT 1 
+    --             FROM `prv_ps_ce_dec_hcb_dev.CET_PROVIDERS` 
+    --             WHERE PROVIDER_IDENTIFICATION_NBR = 9860434 
+    --                 AND NETWORK_ID = "03892" 
+    --                 AND SERVICE_LOCATION_NBR = 5134124  
+    --                 AND SPECIALTY_CD = "10401"
+    --             ) 
+    --             THEN "10401" ELSE '' END
+    -- );
+
+
+
+
+
+-- Row number: 1133  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "9018694"
+    AND NETWORK_ID = "00606"
+    AND PLACE_OF_SERVICE_CD = "11"
+    AND SERVICE_CD = "99459"
+    AND SERVICE_TYPE_CD = "CPT4";
+
+
+
+
+-- Row number: 1147  Rate retrieved from cet_claim_based_amounts table
+SELECT MAX(RATE) AS RATE
+FROM `prv_ps_ce_dec_hcb_dev.CET_CLAIM_BASED_AMOUNTS`
+WHERE
+    PROVIDER_IDENTIFICATION_NBR = "6380685"
+    AND NETWORK_ID = "00606"
+    AND PLACE_OF_SERVICE_CD = "22"
+    AND SERVICE_CD = "93798"
+    AND SERVICE_TYPE_CD = "CPT4";
